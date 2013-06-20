@@ -1,17 +1,17 @@
 Ionize Search module
 =======================
 
-Version : 1.0
+Version : 1.1
 
-Ionize version : 0.9.9
+Ionize version : 1.0.2
 
-Released on january 2013
+Released on june 2013
 
 ### About
 
-Search gives search capabilities to Ionize.
+Search gives multilang search capabilities to Ionize.
 
-This version of Search works only with Ionize from version 0.9.9
+This version of Search works only with Ionize from version 1.0.2
 
 
 ### Authors
@@ -24,6 +24,14 @@ This version of Search works only with Ionize from version 0.9.9
 * Copy the folder "Search" into the "/modules" folder of your Ionize installation.
 * In the ionize backend, go to : Modules > Administration
 * Click on "install"
+* Create a view containing the tag `<ion:search:display />`
+* Create a page called 'search', it's mandatory
+* Translate title and url of this page to any language
+* Add previous view to this page.
+
+That's all.
+
+To display a search form in other views, simply use the tag `<ion:search:form />`
 
 
 
