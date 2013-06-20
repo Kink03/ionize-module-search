@@ -8,7 +8,7 @@
  * @author		Ionize Dev Team
  * @license		http://ionizecms.com/doc-license
  * @link		http://ionizecms.com
- * @since		Version 0.9.5
+ * @since		Version 1.02
  *
  *
  */
@@ -31,6 +31,7 @@ class Search_Tags extends TagManager
 	public static $tag_definitions = array
 	(
 		'search:form' => 				'tag_search_form',
+		'search:display' => 			'tag_search_display',
 		'search:results' => 			'tag_search_results',
 		'search:realm' =>				'tag_simple_value',
 		'search:results:result' => 		'tag_expand',
@@ -93,6 +94,24 @@ class Search_Tags extends TagManager
 	
 	// ------------------------------------------------------------------------
 
+	
+	/**
+	 * Display the results view
+	 *
+	 * @usage	<ion:search:display />
+	 *
+	 */
+	public static function tag_search_display(FTL_Binding $tag)
+	{	
+		$tag->expand();
+			
+		// the tag returns the content of this view :
+		return $tag->parse_as_nested(file_get_contents(MODPATH.'Search/views/search_result'.EXT));
+	}
+
+	
+	// ------------------------------------------------------------------------
+
 
 	/**
 	 * Search results tag
@@ -126,15 +145,25 @@ class Search_Tags extends TagManager
 				{
 					// arrays of keys, for multisorting
 					$knum = $kdate = array();
+					$unique = array();
 
 					foreach($articles as $key => &$article)
 					{
-						// set number of found words
-						preg_match_all('#'.$realm.'#i', $article['title'].' '.$article['content'], $match);
-						$num = count($match[0]);
+						// remove duplicates
+						if(!in_array($article['id_article'], $unique)) {
+							$unique[] = $article['id_article'];
+						
+							// set number of found words
+							preg_match_all('#'.$realm.'#i', $article['title'].' '.$article['content'], $match);
+							$num = count($match[0]);
 
-						$article['nb_words'] = $knum[$key] = $num;
-						$kdate[$key] = strtotime($article['date']);
+							$article['nb_words'] = $knum[$key] = $num;
+							$kdate[$key] = strtotime($article['date']);
+						
+						} else {
+							unset($articles[$key]);
+						}
+						
 					}
 
 					// Sort the results by realm occurences DESC first, by date DESC second.

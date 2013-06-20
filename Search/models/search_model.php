@@ -6,7 +6,7 @@
  * @author		Ionize Dev Team
  * @license		http://ionizecms.com/doc-license
  * @link		http://ionizecms.com
- * @since		Version 0.9.5
+ * @since		Version 1.02
  */
 
 // ------------------------------------------------------------------------
@@ -47,6 +47,7 @@ class Search_model extends Base_model
 
 		$lang = Settings::get_lang();
 
+		
 		// Page_Article table
 		$this->{$this->db_group}->select($this->parent_table.'.*', FALSE);
 		$this->{$this->db_group}->join(

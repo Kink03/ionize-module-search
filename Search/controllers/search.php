@@ -6,7 +6,7 @@
  * @author		Ionize Dev Team
  * @license		http://ionizecms.com/doc-license
  * @link		http://ionizecms.com
- * @since		Version 0.94
+ * @since		Version 1.02
  */
 
 // ------------------------------------------------------------------------
@@ -22,7 +22,7 @@
  */
 
 
-class Search extends Base_Controller 
+class Search extends My_Module
 {
 
 	// ------------------------------------------------------------------------
